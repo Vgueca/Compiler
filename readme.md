@@ -1,5 +1,3 @@
-# LINFO2132 - Languages and translators
-
 Compiler implementation project for a custom language (see [code_example.lang](code_example.lang)).
 
 ## Project structure
