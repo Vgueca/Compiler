@@ -1,0 +1,36 @@
+Things to take in count while implementing the CodeGenerator.
+
+
+1. The professor do not use generic instruction for all the types (String, int , float...). Instead, depending on the
+ type he uses specific instructions. Check:
+
+  private void numOperation(int longOpcode, int doubleOpcode, Type left, Type right)
+
+  From his Github.
+
+https://github.com/norswap/sigh/blob/8301a3a988eb4ddd2667de1c8edef11e1d790709/src/norswap/sigh/bytecode/BytecodeCompiler.java#L861
+
+invokeStatic(method, SighRuntime.class, "concat", String.class, String.class)
+
+>>>>>>>>> private Object binaryExpression (BinaryExpressionNode node)
+
+
+
+2. "Just emit a xCONST_x / LDC instruction, and ASM will make sure the constant is added to the pool." It is stated in the slides
+
+3. "Takes care of sizing the stack and the space for locals." It is stated in the slides
+
+
+
+4. "Unified interface for loading constants (loadConstant(methodVisitor, 1) vs  methodVisitor.visitInsn(ICONST_1))" It is stated in the slides
+
+
+5. InstructionAdapter > https://stackoverflow.com/questions/44676210/java-asm-how-to-create-local-variables-in-method
+
+
+6. As extra feature for the project > visitLocalVariable  > https://stackoverflow.com/questions/28633731
+
+
+7. JavaAssist
+
+

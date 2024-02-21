@@ -1,0 +1,5 @@
+val hello string = "Hello from the compiled program!";
+
+proc main() void {
+    writeln(hello);
+}

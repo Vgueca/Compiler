@@ -1,0 +1,153 @@
+// Source is a single file. No imports, etc.
+
+// Comments look like this. No block comments.
+
+// The language is strongly and statically typed.
+// Base types are int (signed 32-bit), real (32-bit float), bool (true/false), and string.
+// int values are automatically promoted to real values in mixed expressions.
+// There is no dedicated char type. Characters are represented by integers.
+// Strings are immutable.
+// For int and real, available operations are
+//      +, -, * , /, - (unary).
+//      ==, <>, <, >, <=, >=
+// For int:
+//      %
+// For boolean:
+//      and, or, ==, <>
+// For strings
+//      + (concatenation), ==, <>
+// The i-th characters/element in a string/array can be read by the index operator [i].
+// Built-in functions: TODO  Built-in functions
+//      not(bool) bool             negates a boolean value
+//      chr(int) string            turns the character (an int value) into a string
+//      len(string or array) int   gives the length of a string or array
+//      floor(real) int            returns the largest integer less than or equal the real value
+
+//TODO Handle this exceptions
+// Exceptions:
+// Run-time errors terminate the running program.
+// Can happen when:
+//    Out of memory
+//    Division by zero
+//    Out-of-bounds array and string access
+//    real->int overflow error
+
+// Operator precedence:
+//     function and constructor calls
+//     parenthesis
+//     index operator
+//     record field access operator .
+//     *,/,%
+//     +,-, unary -
+//     ==, <>, <, >, <=, >=
+//     and, or
+// Operators with same precedence are left-associative.
+      
+// Constants must be declared at the top of the source file.
+// Constant declarations can use expressions and other constants that
+// have been declared earlier. Only base types can be used for constants.
+
+const i int = 3;
+const j real = 3.2*5.0;
+const k int = i*3;
+const message string = "Hello";
+const isEmpty bool = true;
+
+// Constant declarations are followed by record definitions.
+
+record Point {
+    x int;
+    y int;
+}
+
+record Person {
+    name string;
+    location Point;
+    history int[];
+}
+
+// Global variables and values are initialized in the order they appear.
+// Variables and Values always have an initializer, which can be an
+// expression. Values are equivalent to a single-assignment variable.
+// Accessing a variable or value that is not initalized (for example, by calling
+// a procedure in the initializer expression that accesses a global variable
+// before it has been initialized) results in undefined behavior.
+
+var a int = 3;
+val e int = a*2;    // value
+
+// For arrays, only one-dimensional arrays of basetypes are allowed.
+// Record and array variables are references to a record or array. To initialize
+// the variable, it must be assigned an existing record or array, or a new
+// array or record must be created.
+
+var c int[] = int[](5);  // new array of length 5
+var d Person = Person("me", Point(3,7), int[](a*2));  // new record
+
+// Procedures:
+// Procedures have parameters and a return type. The return type
+// can be a type or void.
+// Base type arguments are always passed by value.
+// Records and arrays are always passed by reference.
+//
+// There are built-in procedures for I/O:
+//    readInt, readReal, readString, writeInt, writeReal, write, writeln
+
+// Procedure calls can forward-reference procedures, even in initializers of global
+// variables and values, but not in constants.
+
+// Local variables and values:
+// Procedures and while/if/else/for blocks can declare local variables and values
+// mixed with statements.
+// Their initialization follows the same rules as for global variables.
+
+// Scope:
+// Lexical scoping.
+// Local variables can shadow variables with the same name in surrounding scopes.
+// Keywords, types, procedures, constants, and variables share one name space.
+// All names are case sensitive.
+
+// Control structures:
+// for, while, if/else
+// Control structure bodies are always block statements.
+
+// The left side of an assignment must be either:
+//    a variable
+//    an element of an array
+//         a[3] = 1234;   // a is an array of int
+//    a field access to a record
+//         a.x = 123;
+//         a[3].x = 12;
+//    To simplify the compiler, the left side cannot be an expression, this is not allowed:
+//         someFunctionThatReturnsAnArray()[2] = 2;
+//    Assigning an array or record, copies the reference.
+
+// Deallocating arrays and records:
+// We assume that there is no garbage collector and that the created
+// arrays and records have to be manually deallocated when not needed anymore.
+//       var x Point = Point(3,5);
+//       delete x;
+// Accessing a deallocated array or record results in undefined behavior.
+// Deallocation is not deep. Before a record is deallocated, it is the duty
+// of the programmer to deallocate arrays or records referenced by that record.
+
+proc square(v int) int {
+    return v*v;
+}
+
+proc copyPoints(p1 Point, p2 Point) Point {
+    return Point(p1.x + p2.x, p1.y + p2.y);
+}
+
+proc main() void {
+    var value int = readInt();
+    writeln(square(value));
+    var i int = 1;
+    for i=1 to 100 by 2 {
+        while value <> 3 {
+            // ...
+        }
+    }
+    
+    i = (i+2)*2;
+}

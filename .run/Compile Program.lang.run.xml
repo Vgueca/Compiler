@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Compile Program.lang" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="compiler.Compiler" />
+    <module name="compiler.main" />
+    <option name="PROGRAM_PARAMETERS" value="Program.lang -o Program.class" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="compiler.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
